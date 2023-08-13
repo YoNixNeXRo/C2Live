@@ -1,6 +1,10 @@
 from git import Repo
 from os import walk
 from os.path import join
+from elasticsearch import Elasticsearch
+from datetime import datetime
+from requests import Session
+from uuid import uuid4
 
 ## cloen repo
 ## loop sur les data sauf all
@@ -19,11 +23,19 @@ def loop_on_data():
                 for ip in open(join(root, file), "r"):
                     name = file.replace("IPs.txt", "")
                     ip = ip.replace("\n", "").replace("\r", "")
-                    # print(f"{name} - {ip}")
-                    data.append({"name": name, "ip": ip})
-    print(data)
+
+                    data.append({"framework": name, "ip": ip, "@timestamp": datetime.strftime(datetime.now(), "%Y-%m-%dT00:00:00+02:00")})
+    return data
+
+
+def insert_data(data, es):
+    for d in data:
+        print(d)
+        req = es.create(index="c6", id=uuid4().__str__(), document=d, pipeline="geoip")
+        print(req)
 
 
 if __name__ == '__main__':
     clone_repo("https://github.com/montysecurity/C2-Tracker")
-    loop_on_data()
+    data = loop_on_data()
+    insert_data(data, Elasticsearch(["http://localhost:9200"], verify_certs=False))
