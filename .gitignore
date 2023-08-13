@@ -1,0 +1,4 @@
+elasticsearch-data/
+grafana-data/
+venv/
+.idea
