@@ -30,3 +30,9 @@ services:
       - 5601:5601
     depends_on:
       - elasticsearch
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana-data:/var/lib/grafana
