@@ -7,3 +7,4 @@ C2Live is an open-source project aimed at providing a comprehensive and interact
 Provided by [@Y_NeXRo](https://twitter.com/Y_NeXRo) and [@ikuroNoriiwa](https://twitter.com/ikuroNoriiwa)  
 
 
+![alt text](https://github.com/YoNixNeXRo/C2Live/blob/main/preview/preview.jpg?raw=true)
