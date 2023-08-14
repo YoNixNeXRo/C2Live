@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.12
     container_name: elasticsearch
     restart: always
     environment:
@@ -20,16 +20,6 @@ services:
       - ./elasticsearch-data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
-  kibana:
-    container_name: kibana
-    image: docker.elastic.co/kibana/kibana:7.17.10
-    restart: always
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200    # address of elasticsearch docker container which kibana will connect
-    ports:
-      - 5601:5601
-    depends_on:
-      - elasticsearch
   grafana:
     image: grafana/grafana
     ports:
