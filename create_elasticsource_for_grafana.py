@@ -15,7 +15,7 @@ data = {
     "name": "elasticsearch",
     "type": "elasticsearch",
     "url": "http://elasticsearch:9200",
-    "access": "server",
+    "access": "proxy",
     "jsonData": {
         "esVersion": 7,
         "index": "c20",
