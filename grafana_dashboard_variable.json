@@ -130,27 +130,6 @@
           "query": "framework.keyword:$variable_framework AND geoip.country_name.keyword:$variable_country",
           "refId": "A",
           "timeField": "@timestamp"
-        },
-        {
-          "alias": "",
-          "bucketAggs": [],
-          "datasource": {
-            "type": "elasticsearch",
-            "uid": "e4994ccf-a285-445f-be54-8c393490c47f"
-          },
-          "hide": false,
-          "metrics": [
-            {
-              "id": "1",
-              "settings": {
-                "size": "500"
-              },
-              "type": "raw_data"
-            }
-          ],
-          "query": "geoip.country_name.keyword:$variable_country",
-          "refId": "B",
-          "timeField": "@timestamp"
         }
       ],
       "title": "$variable_country country $variable_framework framework repartition",
@@ -256,8 +235,9 @@
           },
           "metrics": [
             {
+              "field": "ip.keyword",
               "id": "1",
-              "type": "count"
+              "type": "cardinality"
             }
           ],
           "query": "framework.keyword:$variable_framework AND geoip.country_name.keyword:$variable_country",
@@ -265,7 +245,7 @@
           "timeField": "@timestamp"
         }
       ],
-      "title": "$variable_country country Framework repartition",
+      "title": "$variable_country country $variable_framework Framework repartition",
       "transparent": true,
       "type": "barchart"
     },
@@ -346,8 +326,9 @@
           },
           "metrics": [
             {
+              "field": "ip.keyword",
               "id": "1",
-              "type": "count"
+              "type": "cardinality"
             }
           ],
           "query": "framework.keyword:$variable_framework AND geoip.country_name.keyword:$variable_country",
@@ -458,8 +439,9 @@
           },
           "metrics": [
             {
+              "field": "ip.keyword",
               "id": "1",
-              "type": "count"
+              "type": "cardinality"
             }
           ],
           "query": "framework.keyword:$variable_framework AND geoip.country_name.keyword:$variable_country",
@@ -618,7 +600,7 @@
       "type": "text"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -626,7 +608,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "All",
           "value": "$__all"
         },
@@ -675,7 +657,7 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
@@ -686,6 +668,6 @@
   "timezone": "",
   "title": "C2Live",
   "uid": "c396b477-7a2b-483b-b0c1-8cc6711e2c6d",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }
