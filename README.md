@@ -14,6 +14,9 @@ Provided by [@Y_NeXRo](https://twitter.com/Y_NeXRo) and [@ikuroNoriiwa](https://
 #### Install requirements.txt
 `pip install -r requirements.txt`
 #### lunch the docker compose
+> Note: Make sure to have docker compose installed :)
+
+
 `docker-compose -f elastic-grafana-docker-compose.yaml up`
 #### lunch the connectors.py 
 `python3 connectors.py`
