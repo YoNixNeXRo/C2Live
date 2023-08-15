@@ -20,4 +20,5 @@ Provided by [@Y_NeXRo](https://twitter.com/Y_NeXRo) and [@ikuroNoriiwa](https://
 It will create geoip pipeline,elastic connector to grafana and import a default dashboard.
 #### lunch main.py
 `python3 main.py -u http://localhost:9200/  `
+It will ingest todays data so you will only have 1 day of data.
 #### make a cron with main.py to ingest data daily
