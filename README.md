@@ -12,7 +12,7 @@ Provided by [@Y_NeXRo](https://twitter.com/Y_NeXRo) and [@ikuroNoriiwa](https://
 
 ### To run the project:
 #### Install requirements.txt
-`pip install -r requirements.txt`
+`pip3 install -r requirements.txt`
 #### lunch the docker compose
 > Note: Make sure to have docker compose installed :)
 
