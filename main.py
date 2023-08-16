@@ -94,7 +94,7 @@ def get_config():
                         help="Data source github repository")
     parser.add_argument("--local-path", "-l", type=str, default=join(getcwd(), "data"), help="Local path")
     parser.add_argument("--log-level", "-ll", type=str, default=None, help="Log Level")
-    parser.add_argument("--days", "-n", type=int, default=0, help="Number of history days")
+    parser.add_argument("--days", "-n", type=int, default=0, help="Number of history commits from source url ")
 
     args = parser.parse_args()
     return args
