@@ -1,5 +1,3 @@
 gitpython
 elasticsearch
 requests
-colorama
-tqdm
