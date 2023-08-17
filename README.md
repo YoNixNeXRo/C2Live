@@ -22,8 +22,21 @@ Provided by [@Y_NeXRo](https://twitter.com/Y_NeXRo) and [ikuroNoriiwa](https://g
 `python3 connectors.py`
 It will create geoip pipeline,elastic connector to grafana and import a default dashboard.
 ### lunch main.py
-`python3 main.py -u http://localhost:9200/  `  
-It will ingest todays data so you will only have 1 day of data.  
+#### Todays datas
+`python3 main.py -u http://localhost:9200/  `
+
+It will ingest todays data so you will only have 1 day of data. 
+#### Past datas
+You can also ingest past datas
+
+
+`python3 main.py -u http://localhost:9200/ -n <number_of_history_commits>`
+> Note: number of history commits is normally equivalent of 1 day. So ingesting 10 history commits will ingest past 10 days datas.
+
+
+> Warning: At some point in time datas were not labeled the same, going to far away in the history will lead to duplicate and errors. Also ingesting history is taking more time (e.g: 1year could take as long as 1h40min).  
+
+ 
 You can enjoy grafana dashboard on `http://localhost:3000/ `  
 creds are admin:admin
 
