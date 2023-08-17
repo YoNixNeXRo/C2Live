@@ -23,13 +23,30 @@ RESET = "\033[0m"
 def clone_repo(repo_url: str, dest):
     getLogger(__name__).info(clone_repo.__name__)
     getLogger(__name__).debug(f"repo_url : {repo_url}\ndest: {dest}")
-    Repo.clone_from(repo_url, dest)
+    repo = Repo.clone_from(repo_url, dest)
+    return repo
 
 
-def loop_on_data(path) -> list:
+def get_repo_history(repo, days):
+    getLogger(__name__).info(loop_on_data.__name__)
+    getLogger(__name__).debug(f"repo : {repo}")
+    list_commit = repo.iter_commits('main', max_count=days)
+    for commit in list_commit:
+        getLogger(__name__).info(f"commit ID : {commit} - commit message : {repr(commit.message)} - "
+                                 f"commit date : {commit.committed_datetime}")
+        if commit.message == "Nightly Auto Update\n":
+            repo.git.checkout(commit)
+            commit_data = loop_on_data(join(config.local_path, "data"), commit.committed_datetime)
+            insert_data(commit_data, Elasticsearch([config.elastic_url], verify_certs=config.elastic_verify),
+                        config.elastic_index)
+
+
+def loop_on_data(path, date=None) -> list:
     getLogger(__name__).info(loop_on_data.__name__)
     getLogger(__name__).debug(f"path : {path}")
     data = []
+    if date is None:
+        date = datetime.now()
     for root, dirs, files in walk(path):
         for file in files:
 
@@ -40,13 +57,13 @@ def loop_on_data(path) -> list:
                     ip = ip.replace("\n", "").replace("\r", "")
 
                     data.append({"framework": name, "ip": ip, "@timestamp": datetime.strftime(
-                        datetime.now(), "%Y-%m-%dT00:00:00+02:00")})
+                        date, "%Y-%m-%dT00:00:00+02:00")})
     return data
 
 
 def insert_data(data, es, index):
     getLogger(__name__).info(insert_data.__name__)
-    getLogger(__name__).debug(f"data : NotPrinted\nes: {es}\ninded : {index}")
+    getLogger(__name__).debug(f"data : NotPrinted\nes: {es}\nindex : {index}")
     for d in data:
         req = es.create(index=index, id=uuid4().__str__(), document=d, pipeline="geoip")
 
@@ -77,6 +94,7 @@ def get_config():
                         help="Data source github repository")
     parser.add_argument("--local-path", "-l", type=str, default=join(getcwd(), "data"), help="Local path")
     parser.add_argument("--log-level", "-ll", type=str, default=None, help="Log Level")
+    parser.add_argument("--days", "-n", type=int, default=0, help="Number of history commits from source url ")
 
     args = parser.parse_args()
     return args
@@ -92,7 +110,11 @@ if __name__ == '__main__':
     config = get_config()
     if exists(config.local_path):
         rmtree(config.local_path)
-    clone_repo(config.data_url, config.local_path)
-    all_data = loop_on_data(join(config.local_path, "data"))
-    insert_data(all_data, Elasticsearch([config.elastic_url], verify_certs=config.elastic_verify), config.elastic_index)
+    r = clone_repo(config.data_url, config.local_path)
+
+    if config.days > 0:
+        get_repo_history(r, config.days)
+    elif config.days == 0:
+        all_data = loop_on_data(join(config.local_path, "data"))
+        insert_data(all_data, Elasticsearch([config.elastic_url], verify_certs=config.elastic_verify), config.elastic_index)
     rmtree(config.local_path)
