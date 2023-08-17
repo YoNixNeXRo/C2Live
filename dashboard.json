@@ -431,7 +431,7 @@
               "settings": {
                 "min_doc_count": "1",
                 "order": "desc",
-                "orderBy": "_count",
+                "orderBy": "1",
                 "size": "10"
               },
               "type": "terms"
