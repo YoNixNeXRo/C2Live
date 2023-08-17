@@ -19,18 +19,15 @@ Provided by [@Y_NeXRo](https://twitter.com/Y_NeXRo) and [ikuroNoriiwa](https://g
 
 `docker-compose -f elastic-grafana-docker-compose.yaml up`
 ### lunch the connectors.py 
-`python3 connectors.py`
+`python3 connectors.py`  
 It will create geoip pipeline,elastic connector to grafana and import a default dashboard.
 ### lunch main.py
 #### Todays datas
-`python3 main.py -u http://localhost:9200/  `
-
+`python3 main.py -u http://localhost:9200/  `  
 It will ingest todays data so you will only have 1 day of data. 
 #### Past datas
-You can also ingest past datas
-
-
-`python3 main.py -u http://localhost:9200/ -n <number_of_history_commits>`
+You can also ingest past datas  
+`python3 main.py -u http://localhost:9200/ -n <number_of_history_commits>`  
 > Note: number of history commits is normally equivalent of 1 day. So ingesting 10 history commits will ingest past 10 days datas.
 
 
