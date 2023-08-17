@@ -27,9 +27,9 @@
   "panels": [
     {
       "datasource": {
+        "access": "server",
         "type": "elasticsearch",
-        "uid": "e4994ccf-a285-445f-be54-8c393490c47f",
-	"access": "server"
+        "uid": "e4994ccf-a285-445f-be54-8c393490c47f"
       },
       "fieldConfig": {
         "defaults": {
@@ -465,6 +465,131 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "id": 9,
+      "maxDataPoints": 60,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "framework.keyword",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "1",
+                "size": "5"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "@timestamp",
+              "id": "3",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "e4994ccf-a285-445f-be54-8c393490c47f"
+          },
+          "metrics": [
+            {
+              "field": "ip.keyword",
+              "id": "1",
+              "type": "cardinality"
+            }
+          ],
+          "query": "framework.keyword:$variable_framework ",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": "60d",
+      "title": "Framework detected over time",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "e4994ccf-a285-445f-be54-8c393490c47f"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "thresholds"
           },
           "custom": {
@@ -494,8 +619,8 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 16
+        "x": 0,
+        "y": 24
       },
       "id": 7,
       "maxDataPoints": 1,
@@ -556,9 +681,9 @@
         "uid": "baf72e2b-0d75-441b-be7b-3ccfa477c95a"
       },
       "gridPos": {
-        "h": 3,
+        "h": 2,
         "w": 11,
-        "x": 7,
+        "x": 12,
         "y": 24
       },
       "id": 8,
@@ -604,7 +729,7 @@
       "type": "text"
     }
   ],
-  "refresh": false,
+  "refresh": "",
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -612,14 +737,14 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
         "datasource": {
+          "access": "server",
           "type": "elasticsearch",
-          "uid": "e4994ccf-a285-445f-be54-8c393490c47f",
-	  "access": "server"
+          "uid": "e4994ccf-a285-445f-be54-8c393490c47f"
         },
         "definition": "{\"find\": \"terms\", \"field\": \"framework.keyword\", \"size\": 1000 }",
         "hide": 0,
@@ -637,14 +762,14 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
         "datasource": {
+          "access": "server",
           "type": "elasticsearch",
-          "uid": "e4994ccf-a285-445f-be54-8c393490c47f",
-	  "access": "server"
+          "uid": "e4994ccf-a285-445f-be54-8c393490c47f"
         },
         "definition": "{\"find\": \"terms\", \"field\": \"geoip.country_name.keyword\", \"size\": 1000 }",
         "hide": 0,
@@ -674,7 +799,7 @@
   "timezone": "",
   "title": "C2Live",
   "uid": "c396b477-7a2b-483b-b0c1-8cc6711e2c6d",
-  "version": 3,
+  "version": 5,
   "weekStart": ""
 },
 "folderId": 0,
