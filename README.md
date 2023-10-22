@@ -30,9 +30,6 @@ You can also ingest past datas
 `python3 main.py -u http://localhost:9200/ -n <number_of_history_commits>`  
 > Note: number of history commits is normally equivalent of 1 day. So ingesting 10 history commits will ingest past 10 days datas.
 
-
-> Warning: At some point in time ,datas were not labeled the same, going to far away in the history can lead to duplicate or errors. Also ingesting history is taking more time. Ingesting datas up to 30 days takes around 2min.
-
  
 You can enjoy grafana dashboard on `http://localhost:3000/ `  
 creds are admin:admin
