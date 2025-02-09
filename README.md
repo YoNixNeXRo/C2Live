@@ -9,7 +9,7 @@ Provided by [@Y_NeXRo](https://twitter.com/Y_NeXRo) and [ikuroNoriiwa](https://g
 
 ![alt text](https://github.com/YoNixNeXRo/C2Live/blob/main/preview.jpg?raw=true)
 
-The website version at [c2tracker.com](https://c2tracker.com))
+The website version at [c2tracker.com](https://c2tracker.com)
 
 ## To run the project:
 ### Install requirements.txt
